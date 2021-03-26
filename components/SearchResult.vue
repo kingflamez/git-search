@@ -38,6 +38,7 @@ export default {
   },
   watch: {
     $route(to, from) {
+      // watches for change in query changes and calls the search method
       this.search()
     }
   },
@@ -54,6 +55,7 @@ export default {
 
         const {data} = await axios.get(`https://api.github.com/search/users?q=${search}&per_page=${perPage}&page=${page}`)
 
+        // the data does not come with the full user details, this fetches all the full user details
         const items = await Promise.all(
           data.items.map(async item => {
             const user = await axios.get(item.url)
@@ -67,8 +69,10 @@ export default {
         this.users = items
         this.page = page
         this.loading = false
+        // get the total number of pages with the total count provided
         this.pages = Math.ceil(this.totalCount / perPage)
       } catch (error) {
+        // incase of rate limiting, give a good error feedback
         this.error = true
         this.loading = false
         this.errorMessage = error.response.data.message

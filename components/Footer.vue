@@ -4,10 +4,6 @@
   </footer>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style lang="scss" scoped>
 .footer {
   margin-top: 50px;
