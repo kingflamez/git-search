@@ -21,14 +21,6 @@ export default {
       type: Number,
       required: true
     }
-  },
-  computed: {
-    gapsPresent() {
-      if (this.pages > 7) {
-        return true
-      }
-      return false
-    }
   }
 }
 </script>

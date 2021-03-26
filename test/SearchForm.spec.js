@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import {mount} from '@vue/test-utils'
 import SearchForm from '@/components/SearchForm.vue'
 
 describe('Search Form', () => {

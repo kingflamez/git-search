@@ -7,7 +7,10 @@
       <p class="color-text-secondary mt-3">{{ errorMessage }}</p>
     </div>
     <div v-else>
-      <h1 class="search__results">Search Results: {{ totalCount }} {{ totalCount === 1 ? 'User' : 'Users' }}</h1>
+      <h1 class="search__results">
+        Search Results: {{ totalCount }}
+        {{ totalCount === 1 ? 'User' : 'Users' }}
+      </h1>
       <user-data v-for="user in users" :key="user.id" :user="user" />
       <pagination v-if="pages > 1" :page="page" :pages="pages" />
     </div>
@@ -15,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Loader from './Loader.vue'
 import Pagination from './Search/Pagination.vue'
 import UserData from './Search/UserData.vue'
@@ -37,8 +41,8 @@ export default {
       this.search()
     }
   },
-  mounted() {
-    this.search()
+  async mounted() {
+    await this.search()
   },
   methods: {
     async search() {
@@ -48,16 +52,17 @@ export default {
         const page = this.$route.query.page ? parseInt(this.$route.query.page) : 1
         const perPage = 10
 
-        const {data} = await this.$axios.get(`https://api.github.com/search/users?q=${search}&per_page=${perPage}&page=${page}`)
+        const {data} = await axios.get(`https://api.github.com/search/users?q=${search}&per_page=${perPage}&page=${page}`)
 
         const items = await Promise.all(
           data.items.map(async item => {
-            const user = await this.$axios.get(item.url)
+            const user = await axios.get(item.url)
 
             item.user = user.data
             return item
           })
         )
+
         this.totalCount = data.total_count
         this.users = items
         this.page = page

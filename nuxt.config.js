@@ -48,8 +48,6 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
     '@nuxtjs/style-resources',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa'
@@ -59,9 +57,6 @@ export default {
     // your settings here
     scss: ['~/assets/scss/abstracts/_mixins.scss', '~/assets/scss/abstracts/_variables.scss', 'bootstrap/scss/_functions.scss', 'bootstrap/scss/_variables.scss', 'bootstrap/scss/mixins/_breakpoints.scss']
   },
-
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
