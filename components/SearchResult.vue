@@ -7,7 +7,7 @@
       <p class="color-text-secondary mt-3">{{ errorMessage }}</p>
     </div>
     <div v-else>
-      <h1 class="search__results">Search Results: {{ totalCount }} Users</h1>
+      <h1 class="search__results">Search Results: {{ totalCount }} {{ totalCount === 1 ? 'User' : 'Users' }}</h1>
       <user-data v-for="user in users" :key="user.id" :user="user" />
       <pagination v-if="pages > 1" :page="page" :pages="pages" />
     </div>

@@ -2,8 +2,10 @@
   <div>
     <Header />
     <main class="container">
-      <SearchResult v-if="$route.query.search" />
-      <SearchForm v-else />
+      <transition name="fade-slide-up" mode="out-in">
+        <SearchResult v-if="$route.query.search" />
+        <SearchForm v-else />
+      </transition>
       <Footer />
     </main>
   </div>
